@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lvTodoItems = (ListView) findViewById(R.id.lvTodoItems);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.todo_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        lvTodoItems.setAdapter(adapter);
 
     }
 }
