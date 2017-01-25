@@ -9,12 +9,16 @@
         android:id="@+id/activity_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Task name:" />
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:text="Task name" />
 
         <EditText
             android:id="@+id/etTaskName"
@@ -22,44 +26,44 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Due on" />
+            android:text="Due DATE" />
 
         <TimePicker
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </TimePicker>
-
-        <DatePicker
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </DatePicker>
+            android:layout_height="wrap_content"></TimePicker>
 
         <TextView
-            android:layout_width="match_parent"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Task piority:" />
+            android:text="Task priority" />
 
         <RadioGroup
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <RadioButton
-                android:id="@+id/rbHighPiority"
+                android:layout_weight="1"
+                android:id="@+id/rbHighPriority"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="High" />
 
             <RadioButton
+                android:layout_weight="1"
                 android:id="@+id/rbMediumPiority"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Medium" />
 
             <RadioButton
+                android:layout_weight="1"
                 android:id="@+id/rbLowPiority"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,12 +76,16 @@
             android:orientation="horizontal">
 
             <Button
+                android:background="@color/colorInfo"
+                android:textColor="@android:color/white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Save" />
 
             <Button
+                android:background="@color/colorDanger"
+                android:textColor="@android:color/white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -85,6 +93,8 @@
         </LinearLayout>
 
         <Button
+            android:textColor="@android:color/white"
+            android:background="@color/colorSuccess"
             android:id="@+id/btAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
