@@ -38,8 +38,8 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
     }
 
     public void addTodoItem(TodoItem item) {
-        String ADD_ITEM = "INSERT INTO Items VALUES(null," + item.getName() + "," + item.getDueDate()
-                + "," + item.getPriority();
+        String ADD_ITEM = "INSERT INTO Items VALUES(null,\"" + item.getName() + "\"," + item.getDueDate()
+                + "," + item.getPriority() + ")";
 
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(ADD_ITEM);
@@ -54,10 +54,10 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM Items", null);
         if (cursor.moveToFirst()) {
             do {
-                TodoItem tmp = new TodoItem(cursor.getInt(cursor.getColumnIndex("id")),
-                        cursor.getString(cursor.getColumnIndex("name")),
-                        cursor.getInt(cursor.getColumnIndex("priority")),
-                                cursor.getLong(cursor.getColumnIndex("dueDate")));
+                TodoItem tmp = new TodoItem(cursor.getInt(cursor.getColumnIndex("Id")),
+                        cursor.getString(cursor.getColumnIndex("Name")),
+                        cursor.getInt(cursor.getColumnIndex("Priority")),
+                                cursor.getLong(cursor.getColumnIndex("DueDate")));
 
                 todoItems.add(tmp);
             } while (cursor.moveToNext());
