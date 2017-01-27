@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView lvTodoItems;
     private String[] items = {"Complete CoderSchool Pre-work", "Learn Scrum", "Convert PhuotDi app to RxJava"};
     private TodoItemDatabase database;
+    private TodoAdapter todoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +22,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         database = TodoItemDatabase.getInstance(this);
 
+        todoAdapter = new TodoAdapter(this, R.layout.todo_item, database.getTodoItems());
         lvTodoItems = (ListView) findViewById(R.id.lvTodoItems);
-        ArrayAdapter<TodoItem> adapter = new ArrayAdapter<TodoItem>(this, android.R.layout.simple_list_item_1, database.getTodoItems());
-        lvTodoItems.setAdapter(adapter);
+
+        lvTodoItems.setAdapter(todoAdapter);
 
 
     }
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ArrayAdapter<TodoItem> adapter = new ArrayAdapter<TodoItem>(this, android.R.layout.simple_list_item_1, database.getTodoItems());
-        lvTodoItems.setAdapter(adapter);
+        todoAdapter = new TodoAdapter(this, R.layout.todo_item, database.getTodoItems());
+        lvTodoItems = (ListView) findViewById(R.id.lvTodoItems);
     }
 }
