@@ -65,4 +65,19 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
 
         return todoItems;
     }
+
+    public TodoItem getItem(int todoId) {
+        TodoItem item = null;
+
+        String query = String.format("SELECT * FROM Items WHERE Id =");
+
+        return item;
+    }
+
+    public void updateTodoItem(TodoItem item) {
+    }
+
+    public void deleteTodoItem(TodoItem item) {
+
+    }
 }

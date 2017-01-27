@@ -81,6 +81,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btSave"
                 android:background="@color/colorInfo"
                 android:textColor="@android:color/white"
                 android:layout_width="0dp"
@@ -89,6 +90,7 @@
                 android:text="Save" />
 
             <Button
+                android:id="@+id/btDelete"
                 android:background="@color/colorDanger"
                 android:textColor="@android:color/white"
                 android:layout_width="0dp"

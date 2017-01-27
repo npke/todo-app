@@ -57,4 +57,8 @@ public class TodoItem {
     public long getDueDate() {
         return dueDate;
     }
+
+    public int getId() {
+        return id;
+    }
 }

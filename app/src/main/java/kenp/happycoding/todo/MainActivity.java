@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,7 +29,17 @@ public class MainActivity extends AppCompatActivity {
 
         lvTodoItems.setAdapter(todoAdapter);
 
+        lvTodoItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TodoItem selectedItem = database.getTodoItems().get(i);
 
+                Intent intent = new Intent(MainActivity.this, TodoItem.class);
+                intent.putExtra("todoId", selectedItem.getId());
+
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -52,4 +64,6 @@ public class MainActivity extends AppCompatActivity {
         todoAdapter = new TodoAdapter(this, R.layout.todo_item, database.getTodoItems());
         lvTodoItems = (ListView) findViewById(R.id.lvTodoItems);
     }
+
+
 }

@@ -1,5 +1,6 @@
 package kenp.happycoding.todo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,9 +19,11 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton rbHigh, rbMedium, rbLow;
     private DatePicker dpTaskDueDate;
 
-    private Button btAdd;
+    private Button btAdd, btSave, btDelete;
 
     private TodoItemDatabase database;
+
+    private TodoItem item = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +41,37 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         dpTaskDueDate = (DatePicker) findViewById(R.id.dpTaskDueDate);
 
         btAdd = (Button) findViewById(R.id.btAdd);
+        btSave = (Button) findViewById(R.id.btSave);
+        btDelete = (Button) findViewById(R.id.btDelete);
 
         btAdd.setOnClickListener(this);
+
+        Intent startIntent = getIntent();
+        int todoId = startIntent.getIntExtra("todoId", -1);
+
+        if (todoId != -1) {
+            item = database.getItem(todoId);
+
+            etTaskName.setText(item.getName());
+            if (item.getPriority() == 1)
+                rbHigh.setChecked(true);
+            else if (item.getPriority() == 2)
+                rbMedium.setChecked(true);
+            else rbLow.setChecked(true);
+
+            Date dueDate = new Date(item.getDueDate());
+            dpTaskDueDate.init(dueDate.getYear(), dueDate.getMonth(), dueDate.getDay(), new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
+                    item.setDueDate(new Date(i, i1, i2).getTime());
+                }
+            });
+
+            btAdd.setVisibility(View.GONE);
+        } else {
+            btSave.setVisibility(View.GONE);
+            btDelete.setVisibility(View.GONE);
+        }
     }
 
 
@@ -57,6 +89,19 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
             item.setDueDate(dueDate.getTime());
 
             database.addTodoItem(item);
+            finish();
+        } else if (view.getId() == btSave.getId()) {
+            item.setName(etTaskName.getText().toString());
+            if (rbHigh.isChecked())
+                item.setPriority(1);
+            else if (rbMedium.isChecked())
+                item.setPriority(2);
+            else item.setPriority(3);
+
+            database.updateTodoItem(item);
+            finish();
+        } else {
+            database.deleteTodoItem(item);
             finish();
         }
     }
