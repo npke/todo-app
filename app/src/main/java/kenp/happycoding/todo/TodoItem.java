@@ -24,7 +24,7 @@ public class TodoItem {
         this.name = name;
     }
 
-    public String getPriority() {
+    public String getPriorityString() {
         if (priority == 1)
             return "High";
         else if (priority == 2)
@@ -36,7 +36,7 @@ public class TodoItem {
         this.priority = priority;
     }
 
-    public String getDueDate() {
+    public String getDueDateString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
         return dateFormat.format(new Date(dueDate));
     }
@@ -48,5 +48,13 @@ public class TodoItem {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public long getDueDate() {
+        return dueDate;
     }
 }
