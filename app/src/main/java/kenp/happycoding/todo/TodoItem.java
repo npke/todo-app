@@ -16,6 +16,10 @@ public class TodoItem {
         this.dueDate = dueDate;
     }
 
+    public TodoItem() {
+
+    }
+
     public String getName() {
         return name;
     }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TodoItem selectedItem = database.getTodoItems().get(i);
 
-                Intent intent = new Intent(MainActivity.this, TodoItem.class);
+                Intent intent = new Intent(MainActivity.this, ItemActivity.class);
                 intent.putExtra("todoId", selectedItem.getId());
 
                 startActivity(intent);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         todoAdapter = new TodoAdapter(this, R.layout.todo_item, database.getTodoItems());
-        lvTodoItems = (ListView) findViewById(R.id.lvTodoItems);
+        lvTodoItems.setAdapter(todoAdapter);
     }
 
 

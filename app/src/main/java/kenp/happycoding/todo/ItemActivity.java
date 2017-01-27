@@ -45,6 +45,8 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         btDelete = (Button) findViewById(R.id.btDelete);
 
         btAdd.setOnClickListener(this);
+        btSave.setOnClickListener(this);
+        btDelete.setOnClickListener(this);
 
         Intent startIntent = getIntent();
         int todoId = startIntent.getIntExtra("todoId", -1);

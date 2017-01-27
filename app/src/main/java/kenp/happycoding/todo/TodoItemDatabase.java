@@ -69,15 +69,30 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
     public TodoItem getItem(int todoId) {
         TodoItem item = null;
 
-        String query = String.format("SELECT * FROM Items WHERE Id =");
+        String query = String.format("SELECT * FROM Items WHERE Id = %d", todoId);
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            item = new TodoItem(cursor.getInt(cursor.getColumnIndex("Id")),
+                    cursor.getString(cursor.getColumnIndex("Name")),
+                    cursor.getInt(cursor.getColumnIndex("Priority")),
+                    cursor.getLong(cursor.getColumnIndex("DueDate")));
+        }
 
         return item;
     }
 
     public void updateTodoItem(TodoItem item) {
+        String query = String.format("UPDATE Items SET Name=\"%s\",DueDate=%d,Priority=%d WHERE Id=%d", item.getName(), item.getDueDate(), item.getPriority(), item.getId());
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(query);
     }
 
     public void deleteTodoItem(TodoItem item) {
-
+        String query = String.format("DELETE FROM Items WHERE Id=%d", item.getId());
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(query);
     }
 }
