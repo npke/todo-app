@@ -32,9 +32,12 @@
             android:layout_height="wrap_content"
             android:text="Due DATE" />
 
-        <TimePicker
+        <DatePicker
+            android:id="@+id/dpTaskDueDate"
+            android:datePickerMode="spinner"
+            android:spinnersShown="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></TimePicker>
+            android:layout_height="wrap_content"></DatePicker>
 
         <TextView
             android:textAllCaps="true"
@@ -54,6 +57,7 @@
                 android:id="@+id/rbHighPriority"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="High" />
 
             <RadioButton
