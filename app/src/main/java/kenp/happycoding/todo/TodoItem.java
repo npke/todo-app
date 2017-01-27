@@ -1,5 +1,6 @@
 package kenp.happycoding.todo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TodoItem {
@@ -23,16 +24,21 @@ public class TodoItem {
         this.name = name;
     }
 
-    public int getPriority() {
-        return priority;
+    public String getPriority() {
+        if (priority == 1)
+            return "High";
+        else if (priority == 2)
+            return "Medium";
+        return "Low";
     }
 
     public void setPriority(int priority) {
         this.priority = priority;
     }
 
-    public long getDueDate() {
-        return dueDate;
+    public String getDueDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
+        return dateFormat.format(new Date(dueDate));
     }
 
     public void setDueDate(long dueDate) {

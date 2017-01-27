@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/tvDueDate"
+        android:id="@+id/tvTaskDueDate"
         android:text="24 May, 2017"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
