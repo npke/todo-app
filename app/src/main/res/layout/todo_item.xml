@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    android:paddingLeft="16dp"
     android:layout_height="match_parent">
     <TextView
         android:text="Complete CoderSchool pre-work"
+        android:textStyle="bold"
         android:id="@+id/tvTaskName"
+        android:layout_marginBottom="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:background="@color/colorInfo"
+        android:textColor="@android:color/white"
         android:id="@+id/tvTaskPriority"
-        android:text="High"
-        android:layout_width="match_parent"
+        android:layout_below="@+id/tvTaskName"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:textSize="10sp"
+        android:text="Medium"
+        android:layout_width="50dp"
+        android:gravity="center"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/tvTaskDueDate"
+        android:layout_below="@+id/tvTaskName"
+        android:layout_toRightOf="@id/tvTaskPriority"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:text="24 May, 2017"
-        android:layout_width="match_parent"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-</LinearLayout>
+</RelativeLayout>
