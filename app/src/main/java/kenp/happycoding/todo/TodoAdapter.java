@@ -1,6 +1,7 @@
 package kenp.happycoding.todo;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,16 @@ public class TodoAdapter extends ArrayAdapter {
         tvTaskName.setText(item.getName());
         tvTaskPriority.setText(item.getPriorityString());
         tvTaskDueDate.setText(item.getDueDateString());
+
+        int color = R.color.colorInfo;
+
+        if (item.getPriority() == 1) {
+            color = R.color.colorDanger;
+        } else if (item.getPriority() == 2) {
+            color = R.color.colorSuccess;
+        }
+
+        tvTaskPriority.setBackgroundColor(getContext().getResources().getColor(color));
 
         return convertView;
     }
