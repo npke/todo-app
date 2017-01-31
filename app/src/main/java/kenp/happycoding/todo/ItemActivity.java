@@ -1,6 +1,8 @@
 package kenp.happycoding.todo;
 
 import android.content.Intent;
+import android.provider.CalendarContract;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class ItemActivity extends AppCompatActivity implements View.OnClickListener {
@@ -62,17 +65,18 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
             else rbLow.setChecked(true);
 
             Date dueDate = new Date(item.getDueDate());
-            dpTaskDueDate.init(dueDate.getYear(), dueDate.getMonth(), dueDate.getDay(), new DatePicker.OnDateChangedListener() {
-                @Override
-                public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
-                    item.setDueDate(new Date(i, i1, i2).getTime());
-                }
-            });
 
+            int y = dueDate.getYear();
+            int m = dueDate.getMonth();
+            int d = dueDate.getDate();
+
+            dpTaskDueDate.updateDate(dueDate.getYear() + 1900, dueDate.getMonth(), dueDate.getDate());
+            dpTaskDueDate.setMinDate(System.currentTimeMillis());
             btAdd.setVisibility(View.GONE);
         } else {
             btSave.setVisibility(View.GONE);
             btDelete.setVisibility(View.GONE);
+            dpTaskDueDate.setMinDate(System.currentTimeMillis());
         }
     }
 
@@ -86,6 +90,10 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
             else if (rbTaskPriority.getCheckedRadioButtonId() == rbMedium.getId()) {
                 item.setPriority(2);
             } else item.setPriority(3);
+
+            int y = dpTaskDueDate.getYear();
+            int m = dpTaskDueDate.getMonth();
+            int d = dpTaskDueDate.getDayOfMonth();
 
             Date dueDate = new Date(dpTaskDueDate.getYear() - 1900, dpTaskDueDate.getMonth(), dpTaskDueDate.getDayOfMonth());
             item.setDueDate(dueDate.getTime());
