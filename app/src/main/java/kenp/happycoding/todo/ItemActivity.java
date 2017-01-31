@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -87,6 +88,10 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view.getId() == btAdd.getId()) {
+            if (!validateTodoItem()) {
+                return;
+            }
+
             TodoItem item = new TodoItem(0, etTaskName.getText().toString(), 1, 0);
             if (rbTaskPriority.getCheckedRadioButtonId() == rbHigh.getId())
                 item.setPriority(1);
@@ -104,6 +109,10 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
             database.addTodoItem(item);
             finish();
         } else if (view.getId() == btSave.getId()) {
+            if (!validateTodoItem()) {
+                return;
+            }
+
             item.setName(etTaskName.getText().toString());
             if (rbHigh.isChecked())
                 item.setPriority(1);
@@ -117,5 +126,14 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
             database.deleteTodoItem(item);
             finish();
         }
+    }
+
+    private boolean validateTodoItem() {
+        if (etTaskName.getText().length() == 0) {
+            Toast.makeText(this, "Task name can't be blank", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 }
