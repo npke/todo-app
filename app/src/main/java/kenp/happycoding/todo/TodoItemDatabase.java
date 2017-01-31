@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TodoItemDatabase extends SQLiteOpenHelper {
@@ -30,6 +31,20 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
                 + ",Name TEXT,DueDate DateTime, Priority INTEGER)";
 
         sqLiteDatabase.execSQL(CREATE_ITEM_TABLE);
+        seedDatabase(sqLiteDatabase);
+    }
+
+    private void seedDatabase(SQLiteDatabase db) {
+        ArrayList<TodoItem> initial_todo = new ArrayList<>();
+        initial_todo.add(new TodoItem(0, "Complete CoderSchool pre-work", 1, new Date().getTime()));
+        initial_todo.add(new TodoItem(1, "Travel to Saigon", 2, new Date().getTime()));
+        initial_todo.add(new TodoItem(2, "Meet with Tuan", 3, new Date().getTime()));
+
+        final String SEED_DATABASE = "INSERT INTO Items VALUES"
+                + "(null,\"" + initial_todo.get(0).getName() + "\"," + initial_todo.get(0).getDueDate() + "," + initial_todo.get(0).getPriority() + "), "
+        + "(null,\"" + initial_todo.get(1).getName() + "\"," + initial_todo.get(1).getDueDate() + "," + initial_todo.get(1).getPriority() + "), "
+        + "(null,\"" + initial_todo.get(2).getName() + "\"," + initial_todo.get(2).getDueDate() + "," + initial_todo.get(2).getPriority() + ")";
+        db.execSQL(SEED_DATABASE);
     }
 
     @Override
