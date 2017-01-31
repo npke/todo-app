@@ -33,6 +33,9 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         database = TodoItemDatabase.getInstance(this);
 
         etTaskName = (EditText) findViewById(R.id.etTaskName);
