@@ -46,6 +46,7 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         rbLow = (RadioButton) findViewById(R.id.rbLowPiority);
 
         dpTaskDueDate = (DatePicker) findViewById(R.id.dpTaskDueDate);
+        dpTaskDueDate.requestFocus();
 
         btAdd = (Button) findViewById(R.id.btAdd);
         btSave = (Button) findViewById(R.id.btSave);
@@ -135,5 +136,11 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
